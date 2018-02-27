@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Lancer le programme",
-            "program": "${workspaceFolder}/HelloWordApp\\hello_word.js"
+            "program": "${workspaceFolder}/express-libraryEstelle-tuto/bin/www"
         }
     ]
 }
