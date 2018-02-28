@@ -16,8 +16,11 @@ var app = express();
 // connection DB
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb://127.0.0.1/libraryDB';
-mongoose.connect(mongoDB);
+if(process.env.NODE_ENV === 'test'){
+  mongoose.connect('mongodb://127.0.0.1/libraryDB_test');
+}else {
+  mongoose.connect('mongodb://127.0.0.1/libraryDB');
+}
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
