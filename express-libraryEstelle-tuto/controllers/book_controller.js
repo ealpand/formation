@@ -5,15 +5,26 @@ var Author = require('../models/author');
 var Genre = require('../models/genre');
 var BookInstance = require('../models/bookinstance');
 
-exports.getAll = function(req, res, next){
-    Book.find({}, 'title author')
-        .populate('author')
-        .exec(function (err, list_books) {
+function getAllData(){
+    return Book.find({}, 'title author').populate('author');
+}
+
+exports.renderAPI = function(req, res, next){
+    getAllData().exec(function (err, list_books) {
+    if (err) { return next(err); }
+        //Successful, so render
+        res.send(list_books);
+    });
+}
+
+exports.renderHtml = function(req, res, next){
+    getAllData().exec(function (err, list_books) {
         if (err) { return next(err); }
         //Successful, so render
         res.render('books', {books_list: list_books });
     });
-} 
+}
+
 exports.getById = function(req, res, next){
     async.parallel({
         bookdetail: function(callback) {

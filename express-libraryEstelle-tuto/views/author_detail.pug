@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Auteurs : #{author.name}
+  
+  if author.date_of_birth === undefined 
+    p #[strong Né(e) le:] aucune date de naissance renseignée
+  else
+    p #[strong Né(e) le:] #{author.date_of_birth_formatted}
+
+  if author.date_of_death === undefined 
+    p #[strong Décédé(e) le :] pas encore mort !
+  else
+    p #[strong Décédé(e):] #{author.date_of_death_formatted}
+  
+  p #[strong Durée de vie :] #{author.lifespan}
+  

@@ -1,15 +1,30 @@
-exports.getAll = function(req, res, next){
-    res.send("Liste");
-} 
+var async = require('async');
+
+var Author = require('../models/author');
+
+function getAllData(){
+    return Author.find({});
+}
+
+exports.renderAPI = function(req, res, next){
+    getAllData().exec(function (err, list_authors) {
+    if (err) { return next(err); }
+        //Successful, so render
+        res.send(list_authors);
+    });
+}
+
+exports.renderHtml = function(req, res, next){
+    getAllData().exec(function (err, list_authors) {
+        if (err) { return next(err); }
+        //Successful, so render
+        res.render('authors', {authors_list: list_authors });
+    });
+}
+
 exports.getById = function(req, res, next){
-    res.send(`Livre id : ${req.params.id}` );
-} 
-exports.create = function(req, res, next){
-    res.send(`Livre id : ${req.params.id}` );
-} 
-exports.update = function(req, res, next){
-    res.send(`Livre id : ${req.params.id}` );
-} 
-exports.delete = function(req, res, next){
-    res.send(`Livre id : ${req.params.id}` );
+    Author.findById({_id: req.params.id})
+    .exec(function(err, results ) {
+        res.render('author_detail', {author: results});
+    });
 } 

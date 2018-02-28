@@ -1,1 +1,10 @@
-extends layout.pug
+extends layout
+
+block content
+    h1 Liste des auteurs
+    ul
+    each authors in authors_list
+        li
+            a(class='button' href=authors.url) #{authors.name}
+    else
+        li Aucun auteur
