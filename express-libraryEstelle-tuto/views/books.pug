@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 Liste de livres
+    ul
+    each book in books_list
+        li
+            a(class='button' href=book.url) #{book.title} | #{book.author.name}
+    else
+        li Aucun livre de disponible

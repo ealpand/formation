@@ -1,13 +1,14 @@
+var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 var moment = require('moment');
 var dateUtils = require('../utils/dateUtils');
 
 var AuthorSchema = new Schema({
-    firstName: { type :String, required:true},
-    lastName: { type :String, required:true},
-    dateOfBirth: { type :Date},
-    dateOfDeath: { type :Date},
+    first_name: { type :String, required:true},
+    family_name: { type :String, required:true},
+    date_of_birth: { type :Date},
+    date_of_death: { type :Date},
 
 });
 
@@ -16,11 +17,11 @@ AuthorSchema.virtual('url').get(function () {
 });
 
 AuthorSchema.virtual('name').get(function () {
-  return '${this.firstName} ${this.lastName}' ;
+  return `${this.first_name} ${this.family_name}` ;
 });
 
 AuthorSchema.virtual('lifespan').get(function () {
-  return dateUtils.lifespan(this.dateOfBirth, this.dateOfDeath) ;
+  return dateUtils.lifespan(this.date_of_birth, this.date_of_death) ;
 });
 
 module.exports = mongoose.model('AuthorModel', AuthorSchema);

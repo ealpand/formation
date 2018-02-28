@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Local Library Home
+    p welcome to Estelle LIBRARY
+    h2 Dynamic content
+    p The library has the following record counts :
+    ul
+        li Books : #{data.book_count} 
+        li Copies : #{data.book_instance_count} 
+        li Copies available : #{data.book_instance_available_count} 
+        li Author : #{data.author_count} 
+        li Genre : #{data.genre_count} 
